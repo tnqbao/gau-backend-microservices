@@ -1,6 +1,12 @@
 [submodule "gau-account-service"]
 	path = gau-account-service
 	url = https://github.com/tnqbao/gau-account-service.git
+[submodule "gau-authorization-service"]
+	path = gau-authorization-service
+	url = https://github.com/tnqbao/gau-authorization-service.git
 [submodule "gau-cdn-service"]
 	path = gau-cdn-service
 	url = https://github.com/tnqbao/gau-cdn-service.git
+[submodule "gau-upload-service"]
+	path = gau-upload-service
+	url = https://github.com/tnqbao/gau-upload-service
