@@ -1,49 +1,38 @@
 #!/bin/bash
 
-# Script để cập nhật tất cả các Git submodule,
-# lấy commit message mới nhất từ mỗi submodule,
-# sau đó commit lại trong repo chính.
+set -e
 
-set -e  # Dừng script nếu có lỗi xảy ra
-
-# Lấy ngày hôm nay để gắn vào commit message
 today=$(date +"%Y-%m-%d")
-
-# Biến chứa tổng hợp thông tin cập nhật từ từng submodule
 update_logs=""
 
-# Lặp qua tất cả các submodule được khai báo trong .gitmodules
 git config --file .gitmodules --get-regexp path | while read -r key path; do
   echo "Updating submodule: $path"
 
-  # Di chuyển vào thư mục submodule
   cd "$path"
 
-  # Lấy tên nhánh hiện tại (thường là main hoặc master)
-  branch=$(git symbolic-ref --short HEAD)
+  # Checkout về master nếu có
+  if git show-ref --verify --quiet refs/heads/master; then
+    git checkout master
+  else
+    echo "Skipping $path — no local 'master' branch."
+    cd - > /dev/null
+    continue
+  fi
 
-  # Pull commit mới nhất từ remote của submodule
-  git pull origin "$branch"
+  git pull origin master
 
-  # Lấy commit message mới nhất trong submodule
   latest_msg=$(git log -1 --pretty=format:"%s")
+  update_logs+="$path (master): $latest_msg"$'\n'
 
-  # Thêm vào log tổng hợp
-  update_logs+="$path ($branch): $latest_msg"$'\n'
-
-  # Quay lại thư mục gốc của repo chính
   cd - > /dev/null
 done
 
-# Nếu có bất kỳ cập nhật nào từ submodule, thực hiện commit trong repo chính
 if [[ -n "$update_logs" ]]; then
   echo "Committing submodule updates to main repository..."
 
   git add .
 
-  git commit -m "Update submodules on $today:
-
-$update_logs"
+  git commit -m "Update submodules on $today"$'\n\n'"$update_logs"
   git push origin master
 else
   echo "No updates found in submodules."
