@@ -10,3 +10,6 @@
 [submodule "gau-upload-service"]
 	path = gau-upload-service
 	url = https://github.com/tnqbao/gau-upload-service
+[submodule "gau-kanban-service"]
+	path = gau-kanban-service
+	url = https://github.com/tnqbao/gau-kanban-service.git

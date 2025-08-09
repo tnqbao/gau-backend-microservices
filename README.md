@@ -18,7 +18,9 @@ Below is a list of services and their main functionalities. This table will be u
 | gau-authorization-service | Authorization, access control, and token management                   | https://github.com/tnqbao/gau-authorization-service.git |
 | gau-cdn-service           | CDN and image management                                              | https://github.com/tnqbao/gau-cdn-service               |
 | gau-upload-service        | File and media upload management                                      | https://github.com/tnqbao/gau-upload-service            |
-| ...                       | ...                                                                   | ...                                                     |
+| gau-kanban-service        | Kanban board management (boards, columns, tasks, project management)  | https://github.com/tnqbao/gau-kanban-service            |
+| ...                       | ...                                                                   | (other)                                                 |
+
 
 ## Getting Started
 
