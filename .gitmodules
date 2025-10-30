@@ -13,3 +13,6 @@
 [submodule "gau-kanban-service"]
 	path = gau-kanban-service
 	url = https://github.com/tnqbao/gau-kanban-service.git
+[submodule "gau-email-service"]
+	path = gau-email-service
+	url = https://github.com/tnqbao/gau-email-service
